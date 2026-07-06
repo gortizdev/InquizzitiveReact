@@ -1,8 +1,7 @@
-import './App.css'
-import {BrowserRouter as Router,  Routes,  Route,  Link} from 'react-router-dom';
+import {BrowserRouter as Router,  Routes,  Route} from 'react-router-dom';
 import Home from "./pages/Home";
 import Survival from "./pages/Survival";
-import Infinity from "./pages/Infinity";
+import InfinityMode from "./pages/Infinity";
 import Leaderboard from "./pages/Leaderboard";
 import Login from "./pages/Login";
 import CreateAccount from "./pages/CreateAccount"
@@ -18,7 +17,7 @@ function App() {
         <Routes>
           <Route path = "/" element = {<Home/>} exact/>
           <Route path = "/survival" element = {<Survival/>} exact/>
-          <Route path = "/infinity" element = {<Infinity/>} exact/>
+          <Route path = "/infinity" element = {<InfinityMode/>} exact/>
           <Route path = "/leaderboard" element = {<Leaderboard/>} exact/>
           <Route path = "/login" element = {<Login/>} exact/>
           <Route path = "/createaccount" element = {<CreateAccount/>} exact/>

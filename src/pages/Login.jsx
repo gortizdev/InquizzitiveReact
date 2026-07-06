@@ -1,18 +1,15 @@
-import React from "react";
 import axios from 'axios';
-import "../App.css";
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import { muteunmute } from "../main";
+import SoundControl from "../components/SoundControl";
 
 function Login () {
   const userRef = useRef();
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-  const [user, setUser] = useState();
+  const [, setUser] = useState();
 
   useEffect(() => {
       userRef.current.focus();
@@ -66,7 +63,7 @@ function Login () {
               className="splashimg"
               id="splashimg"
           />
-          <h1 className="center" style={{animation: "fadeIn 2.0s"}}>Login</h1>
+          <h1 className="center" style={{animation: "fadeIn 0.6s"}}>Login</h1>
           <div className="center">
               <form onSubmit={handleSubmit} className="centerform">
                 <label>
@@ -96,7 +93,7 @@ function Login () {
                   />
                 </div>
                 <div className="center">
-                  <p id = "errormsg" style={{display: "none", color: "red"}}></p>
+                  <p id = "errormsg" style={{display: "none", color: "var(--danger)"}}></p>
                 </div>
                 <div className="center" style={{marginTop: "15px"}}>
                   <input
@@ -112,10 +109,7 @@ function Login () {
               </form>
           </div>
           <div className="center">
-            
-            <button className="icnbtns" id="sound" onClick={muteunmute}>
-              <i className="material-icons">volume_up</i>
-            </button>
+            <SoundControl/>
             <button className="icnbtns" onClick={home}>
               <i className="material-icons">home</i>
             </button>

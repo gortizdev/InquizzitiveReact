@@ -1,19 +1,15 @@
-import React from "react";
 import axios from 'axios';
-import "../App.css";
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { muteunmute } from "../main";
+import SoundControl from "../components/SoundControl";
 
 function CreateAccount () {
-  let inUse;
   let invalid;
   const navigate = useNavigate();
   const home = () =>  navigate('/');
   const loginpage = () => navigate('/login');
   const [inputs, setInputs] = useState("");
-  const [response, setResponse] = useState("");
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -80,7 +76,7 @@ function CreateAccount () {
           className="splashimg"
           id="splashimg"
         />
-      <h1 className="center" style={{animation: "fadeIn 2.0s"}}>Create Account</h1>
+      <h1 className="center" style={{animation: "fadeIn 0.6s"}}>Create Account</h1>
       <div className="center">
           <form onSubmit={handleSubmit} className="centerform">
             <label>
@@ -124,7 +120,7 @@ function CreateAccount () {
               />
             </div>
             <div className="center">
-                  <p id = "errormsg" style={{display: "none", color: "red"}}></p>
+                  <p id = "errormsg" style={{display: "none", color: "var(--danger)"}}></p>
             </div>
             <div className="center" style={{marginTop: "15px"}}>
               <input
@@ -140,10 +136,7 @@ function CreateAccount () {
           </form>
       </div>
       <div className="center">
-        
-        <button className="icnbtns" id="sound" onClick={muteunmute}>
-          <i className="material-icons">volume_up</i>
-        </button>
+        <SoundControl/>
         <button className="icnbtns" onClick={home}>
           <i className="material-icons">home</i>
         </button>

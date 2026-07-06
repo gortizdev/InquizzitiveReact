@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import "../App.css";
+import { useEffect } from "react";
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import { useNavigate } from "react-router-dom";
-import { muteunmute } from "../main";
+import SoundControl from "../components/SoundControl";
 import axios from "axios";
 let db = new Array();
 function Leaderboard() {
@@ -66,7 +65,7 @@ function Leaderboard() {
           id="leadersplashimg"
         />
         <div className="leaderboard" id="leaderboard">
-          <h1 style={{textDecoration: "underline"}}>Top 5 Infinity</h1>
+          <h1>Top 5 Infinity</h1>
           <div>
             <h3 id = "iscore1"></h3>
             <h3 id = "iscore2"></h3>
@@ -74,7 +73,7 @@ function Leaderboard() {
             <h3 id = "iscore4"></h3>
             <h3 id = "iscore5"></h3>
           </div>
-          <h1 style={{textDecoration: "underline"}}>Top 5 Survival</h1>
+          <h1>Top 5 Survival</h1>
           <div>
             <h3 id = "sscore1"></h3>
             <h3 id = "sscore2"></h3>
@@ -85,10 +84,7 @@ function Leaderboard() {
         </div>
         
         <div className="center">
-        
-        <button className="icnbtns" id="sound" onClick={muteunmute}>
-          <i className="material-icons">volume_up</i>
-        </button>
+        <SoundControl/>
         <button className="icnbtns" onClick={home}>
           <i className="material-icons">home</i>
         </button>

@@ -1,9 +1,7 @@
-import React from 'react'
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import { useNavigate } from "react-router-dom";
-import "../App.css";
 import { useEffect } from "react";
-import { muteunmute } from '../main';
+import SoundControl from '../components/SoundControl';
 
 function Home() {
 
@@ -82,19 +80,16 @@ function Home() {
                 <button 
                   id = "logout"
                   className="button" 
-                  style={{display: "none", animation: "fadeIn 2.0s"}}
+                  style={{display: "none", animation: "fadeIn 0.6s"}}
                   onClick={handleLogout}
                 >
                   Logout
                 </button>
                 </div>
             </div>
-            <h2 id = "user" className='center' style={{display : "none" , marginTop: "15px", animation: "fadeIn 2.0s", cursor: "pointer"}} onClick={accountPage}></h2>
+            <h2 id = "user" className='center' style={{display : "none" , marginTop: "15px", animation: "fadeIn 0.6s", cursor: "pointer"}} onClick={accountPage}></h2>
             <div className="center">
-              
-              <button className="icnbtns" id="sound" onClick={muteunmute}>
-                <i className="material-icons">volume_up</i>
-              </button>
+              <SoundControl/>
             </div>
         </>
 

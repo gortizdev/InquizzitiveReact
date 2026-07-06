@@ -1,11 +1,10 @@
-import React from "react";
-import "../App.css";
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import LoadImg from '../Images/Inquizzitive-nobg-logo.png';
 import { useNavigate } from "react-router-dom";
-import  { igamestart, infinityendGame, muteunmute } from '../main';
-import { useRef, useState, useEffect } from "react";
-function Infinity() {
+import  { igamestart, infinityendGame } from '../main';
+import SoundControl from '../components/SoundControl';
+import { useEffect } from "react";
+function InfinityMode() {
     const navigate = useNavigate();
     const home = () =>  navigate('/');
     useEffect(() => {
@@ -245,11 +244,9 @@ function Infinity() {
         <h1 id="gameover">Infinity Ended!</h1>
         <h1 id="fscore">Final Score: </h1>
       </div>
-      <h2 id = "user" className='center' style={{display : "none" , marginTop: "15px", animation: "fadeIn 2.0s"}}></h2>
+      <h2 id = "user" className='center' style={{display : "none" , marginTop: "15px", animation: "fadeIn 0.6s"}}></h2>
       <div className="center">
-        <button className="icnbtns" id="sound" onClick={muteunmute}>
-          <i className="material-icons">volume_up</i>
-        </button>
+        <SoundControl/>
         <button className="icnbtns" onClick={home}>
           <i className="material-icons">home</i>
         </button>
@@ -258,4 +255,4 @@ function Infinity() {
     );
 }
 
-export default Infinity;
+export default InfinityMode;

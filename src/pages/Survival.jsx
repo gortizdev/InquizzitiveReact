@@ -1,10 +1,9 @@
-import React from "react";
-import "../App.css";
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import LoadImg from '../Images/Inquizzitive-nobg-logo.png';
 import { useNavigate } from "react-router-dom";
-import  { sgamestart, endGame, muteunmute } from '../main';
-import { useRef, useState, useEffect } from "react";
+import  { sgamestart } from '../main';
+import SoundControl from '../components/SoundControl';
+import { useEffect } from "react";
 function Survival() {
     const navigate = useNavigate();
     const home = () =>  navigate('/');
@@ -236,12 +235,9 @@ function Survival() {
         <h1 id="gameover">Game Over</h1>
         <h1 id="fscore">Final Score: </h1>
       </div>
-      <h2 id = "user" className='center' style={{display : "none" , marginTop: "15px", animation: "fadeIn 2.0s"}}></h2>
+      <h2 id = "user" className='center' style={{display : "none" , marginTop: "15px", animation: "fadeIn 0.6s"}}></h2>
       <div className="center">
-        
-        <button className="icnbtns" id="sound" onClick={muteunmute}>
-          <i className="material-icons">volume_up</i>
-        </button>
+        <SoundControl/>
         <button className="icnbtns" onClick={home}>
           <i className="material-icons">home</i>
         </button>

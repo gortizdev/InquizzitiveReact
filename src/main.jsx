@@ -9,6 +9,31 @@ let genreid;
 let mode;
 let score;
 const audio = new Audio(music);
+audio.loop = true;
+const savedvolume = parseFloat(localStorage.getItem('volume'));
+audio.volume = Number.isNaN(savedvolume) ? 0.7 : savedvolume;
+
+export function setVolume(value){
+  audio.volume = parseFloat(value);
+  localStorage.setItem('volume', audio.volume);
+}
+export function getVolume(){
+  return audio.volume;
+}
+
+// Autoplay on page start; browsers block audio until the user interacts
+// with the page, so fall back to starting on the first click/keypress.
+function startMusic(e){
+  // Let the sound button's own toggle handle the gesture instead.
+  if (e && e.target.closest && e.target.closest('#sound')) return;
+  audio.play().then(() => {
+    document.removeEventListener('pointerdown', startMusic);
+    document.removeEventListener('keydown', startMusic);
+  }).catch(() => {});
+}
+startMusic();
+document.addEventListener('pointerdown', startMusic);
+document.addEventListener('keydown', startMusic);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,6 +42,10 @@ createRoot(document.getElementById('root')).render(
 )
 
 export function muteunmute(){
+  // The user has taken over playback control; stop the autoplay fallback
+  // so it can't restart music they deliberately paused.
+  document.removeEventListener('pointerdown', startMusic);
+  document.removeEventListener('keydown', startMusic);
   if(audio.paused)
   {
       audio.play();
@@ -110,6 +139,7 @@ function questionsetup(token){
       const nextbutton = document.getElementById('nxt');
       const quiz = document.getElementById('quiz');
       const space = document.getElementById('space');
+      const loadimg = document.getElementById('loadimg');
       loadimg.style.display = "none";
       quiz.style.display = "block";
       answers.push(correct);
@@ -144,20 +174,12 @@ function questionsetup(token){
               }
               nextbutton.textContent = "Next Question";
               nextbutton.style.display = "block";
-              nextbutton.addEventListener("click", (e) => {
+              nextbutton.addEventListener("click", () => {
                   if (mode == 'survival' && clicked.style.background == "red"){
                       if (parseInt(score) > parseInt(localStorage.getItem('survivalscore'))){
                           console.log("New High Survival Score!");
                           localStorage.setItem('survivalscore', score);
-                          const instance = axios.create({
-                            baseURL: 'https://ocqgyz1dnd.execute-api.us-east-1.amazonaws.com/production/account',
-                            withCredentials: false,
-                            headers: {
-                              'Access-Control-Allow-Origin' : '*',
-                              'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-                              }
-                          });
-                          let update = {"email": localStorage.getItem('email'), "updateKey" : "survivalscore" , "updateValue" : parseInt(localStorage.getItem('survivalscore'))}; 
+                          let update ={"email": localStorage.getItem('email'), "updateKey" : "survivalscore" , "updateValue" : parseInt(localStorage.getItem('survivalscore'))}; 
                           axios.patch('https://ocqgyz1dnd.execute-api.us-east-1.amazonaws.com/production/account', update)
                           .then(function (response){
                             console.log(response);
@@ -206,15 +228,7 @@ export function infinityendGame(){
   if (parseInt(score) > parseInt(localStorage.getItem('infinityscore'))){
     console.log("New High Infinity Score!");
     localStorage.setItem('infinityscore', score);
-    const instance = axios.create({
-      baseURL: 'https://ocqgyz1dnd.execute-api.us-east-1.amazonaws.com/production/account',
-      withCredentials: false,
-      headers: {
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        }
-    });
-    let update = {"email": localStorage.getItem('email'), "updateKey" : "infinityscore" , "updateValue" : parseInt(localStorage.getItem('infinityscore'))}; 
+    let update ={"email": localStorage.getItem('email'), "updateKey" : "infinityscore" , "updateValue" : parseInt(localStorage.getItem('infinityscore'))}; 
     axios.patch('https://ocqgyz1dnd.execute-api.us-east-1.amazonaws.com/production/account', update)
     .then(function (response){
       console.log(response);

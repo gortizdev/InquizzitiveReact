@@ -1,15 +1,12 @@
-import React from 'react'
 import InquizzNoBg from '../Images/Inquizzitive-nobg.jpg';
 import { useNavigate } from "react-router-dom";
-import "../App.css";
-import { useRef, useState, useEffect } from "react";
-import { muteunmute } from '../main';
+import { useEffect } from "react";
+import SoundControl from '../components/SoundControl';
 
 function Home() {
 
     const navigate = useNavigate();
     const home = () => navigate('/');
-    const loginPage = () => navigate('/login');
     const handleLogout = () =>{
       localStorage.clear();
       navigate('/');   
@@ -51,28 +48,28 @@ function Home() {
             />
             <div className="buttoncontainer">
                 <div>
-                    <h2 id = "user" className='center' style={{marginTop: "15px", animation: "fadeIn 2.0s"}}></h2>
+                    <h2 id = "user" className='center' style={{marginTop: "15px", animation: "fadeIn 0.6s"}}></h2>
                 </div>
                 <div>
-                    <h2 id = "email" className='center' style={{marginTop: "15px", animation: "fadeIn 2.0s"}}></h2>
+                    <h2 id = "email" className='center' style={{marginTop: "15px", animation: "fadeIn 0.6s"}}></h2>
                 </div>
                 <div>
-                    <h2 id = "password" className='center' style={{marginTop: "15px", animation: "fadeIn 2.0s"}}>Pass: ******</h2>
+                    <h2 id = "password" className='center' style={{marginTop: "15px", animation: "fadeIn 0.6s"}}>Pass: ******</h2>
                     
                 </div>
                 <div className='center'>
                     <button id = "show/hide" className = "button" onClick={showhide}>Show Password</button>
                 </div>
                 <div>
-                    <h2 id = "survivalscore" className='center' style={{marginTop: "15px", animation: "fadeIn 2.0s"}}></h2>
+                    <h2 id = "survivalscore" className='center' style={{marginTop: "15px", animation: "fadeIn 0.6s"}}></h2>
                 </div>
                 <div>
-                    <h2 id = "infinityscore" className='center' style={{marginTop: "15px", marginBottom: "15px", animation: "fadeIn 2.0s"}}></h2>
+                    <h2 id = "infinityscore" className='center' style={{marginTop: "15px", marginBottom: "15px", animation: "fadeIn 0.6s"}}></h2>
                 </div>
                 <button 
                   id = "logout"
                   className="button" 
-                  style={{display: "block", animation: "fadeIn 2.0s"}}
+                  style={{display: "block", animation: "fadeIn 0.6s"}}
                   onClick={handleLogout}
                 >
                   Logout
@@ -80,9 +77,7 @@ function Home() {
             </div>
             
             <div className="center">
-              <button className="icnbtns" id="sound" onClick={muteunmute}>
-                <i className="material-icons">volume_up</i>
-              </button>
+              <SoundControl/>
               <button className="icnbtns" onClick={home}>
                 <i className="material-icons">home</i>
               </button>
